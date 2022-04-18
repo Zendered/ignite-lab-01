@@ -1,14 +1,15 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
+import { PrismaPromise, Product } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 import { AuthorizationGuard } from 'src/http/auth/authorization.guard';
 
-@Controller()
+@Controller('api/v1')
 export class AuthController {
   constructor(private prisma: PrismaService) {}
 
-  @Get()
+  @Get('products')
   @UseGuards(AuthorizationGuard)
-  hello() {
-    return 'Hello World';
+  products(): PrismaPromise<Product[]> {
+    return this.prisma.product.findMany();
   }
 }
