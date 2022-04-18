@@ -1,15 +1,22 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
-import { PrismaPromise, Product } from '@prisma/client';
-import { PrismaService } from 'src/database/prisma/prisma.service';
-import { AuthorizationGuard } from 'src/http/auth/authorization.guard';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Product } from 'src/entities/product.entity';
+// import { AuthorizationGuard } from 'src/http/auth/authorization.guard';
+import { ProductsService } from 'src/services/products.service';
+import { ICreateProductsDTO } from 'src/interfaces/dto/create-products-dto';
 
 @Controller('api/v1')
 export class ProductsController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private productsService: ProductsService) {}
 
   @Get('products')
-  @UseGuards(AuthorizationGuard)
-  products(): PrismaPromise<Product[]> {
-    return this.prisma.product.findMany();
+  // @UseGuards(AuthorizationGuard)
+  products(): Promise<Product[]> {
+    return this.productsService.listAllProducts();
+  }
+
+  @Post('products')
+  createProducts(@Body() productsData: ICreateProductsDTO) {
+    this.productsService.createProducts(productsData);
+    return 'Product created';
   }
 }
