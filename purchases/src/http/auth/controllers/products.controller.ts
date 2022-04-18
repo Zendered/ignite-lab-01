@@ -4,7 +4,7 @@ import { PrismaService } from 'src/database/prisma/prisma.service';
 import { AuthorizationGuard } from 'src/http/auth/authorization.guard';
 
 @Controller('api/v1')
-export class AuthController {
+export class ProductsController {
   constructor(private prisma: PrismaService) {}
 
   @Get('products')
