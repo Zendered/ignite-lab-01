@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 import slugify from 'slugify';
 import { ICreateProductsDTO } from 'src/interfaces/dto/create-products-dto';
-import { Purchase } from 'src/entities/purchase.entity';
 
 @Injectable()
 export class ProductsService {
