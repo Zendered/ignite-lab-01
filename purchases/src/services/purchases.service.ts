@@ -1,9 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
-import { Purchase } from 'src/entities/purchase.entity';
 @Injectable()
 export class PurchasesService {
   constructor(private prisma: PrismaService) {}
+
+  listAllCustomer(customerId: string) {
+    return this.prisma.purchase.findMany({
+      where: { customerId },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        product: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+    });
+  }
 
   listAllPurchases() {
     return this.prisma.purchase.findMany({
