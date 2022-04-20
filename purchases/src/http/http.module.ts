@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from 'src/database/database.module';
-import { CustomersService } from 'src/services/customer.service';
+import { CustomersService } from 'src/services/customers.service';
 import { ProductsService } from 'src/services/products.service';
 import { PurchasesService } from 'src/services/purchases.service';
 import { CustomersController } from './auth/controllers/customers.controller';
