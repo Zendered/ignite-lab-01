@@ -1,11 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 import slugify from 'slugify';
-
-interface CreateCourse {
-  title: string;
-  slug: string;
-}
+import { CreateCourse } from 'src/interfaces/create-course';
 
 @Injectable()
 export class CoursesService {
@@ -20,13 +16,15 @@ export class CoursesService {
   }
 
   async findCourseById(id: string) {
-    const user = await this.prisma.course.findUnique({
+    const course = await this.prisma.course.findUnique({
       where: { id },
     });
 
-    if (!user) {
+    if (!course) {
       throw new HttpException('Course not found!', HttpStatus.NOT_FOUND);
     }
+
+    return course;
   }
 
   async createCourse({ title }: CreateCourse) {
