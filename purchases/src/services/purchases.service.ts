@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 @Injectable()
 export class PurchasesService {
@@ -43,7 +43,7 @@ export class PurchasesService {
     });
 
     if (!product) {
-      throw new Error('Product not found!');
+      throw new HttpException('Product not found!', HttpStatus.BAD_REQUEST);
     }
 
     await this.prisma.purchase.create({

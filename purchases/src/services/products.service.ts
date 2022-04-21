@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 import slugify from 'slugify';
 import { ICreateProductsDTO } from 'src/interfaces/dto/create-products-dto';
@@ -24,7 +24,10 @@ export class ProductsService {
     });
 
     if (productWithSameSlug) {
-      throw new Error('Another product with the same slug exists!');
+      throw new HttpException(
+        'Product already exists!',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     await this.prisma.product.create({
