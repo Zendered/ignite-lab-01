@@ -4,7 +4,7 @@ import { CoursesService } from '../services/courses.service';
 import { EnrollmentsService } from '../services/enrollments.service';
 import { StudentsService } from '../services/students.service';
 
-@Controller('api/v1')
+@Controller('api/v1/enrollments')
 export class EnrollmentsController {
   constructor(
     private enrollmentsService: EnrollmentsService,
@@ -12,7 +12,7 @@ export class EnrollmentsController {
     private coursesService: CoursesService,
   ) {}
 
-  @Get('enrollments')
+  @Get()
   @UseGuards(AuthorizationGuard)
   curses() {
     return this.enrollmentsService.listAllEnrollments();
@@ -27,8 +27,6 @@ export class EnrollmentsController {
   @Get('course/:courseId')
   @UseGuards(AuthorizationGuard)
   async course(@Param('courseId') courseId: string) {
-    console.log('id course:', courseId);
-
     return await this.coursesService.findCourseById(courseId);
   }
 }
