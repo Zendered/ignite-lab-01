@@ -1,4 +1,4 @@
 export interface CreateCourse {
   title: string;
-  slug: string;
+  slug?: string;
 }
