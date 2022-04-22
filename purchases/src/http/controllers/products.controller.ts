@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { Product } from 'src/entities/product.entity';
 import { AuthorizationGuard } from 'src/http/auth/authorization.guard';
-import { ProductsService } from 'src/services/products.service';
+import { ProductsService } from 'src/http/services/products.service';
 import { ICreateProductsDTO } from 'src/interfaces/dto/create-products-dto';
 
 @Controller('api/v1')

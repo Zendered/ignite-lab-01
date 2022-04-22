@@ -1,4 +1,4 @@
-import { KafkaService } from '@/messaging/kafka.service';
+import { KafkaService } from '@/http/messaging/kafka.service';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 @Injectable()

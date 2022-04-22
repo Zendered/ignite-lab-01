@@ -1,9 +1,9 @@
 import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { Purchase } from '@prisma/client';
 import { AuthUserDTO } from 'src/interfaces/dto/auth-user-dto';
-import { CustomersService } from 'src/services/customers.service';
-import { ProductsService } from 'src/services/products.service';
-import { PurchasesService } from 'src/services/purchases.service';
+import { CustomersService } from 'src/http/services/customers.service';
+import { ProductsService } from 'src/http/services/products.service';
+import { PurchasesService } from 'src/http/services/purchases.service';
 import { AuthorizationGuard } from '@/http/auth/authorization.guard';
 import { CurrentUser } from '@/http/auth/current-user';
 
