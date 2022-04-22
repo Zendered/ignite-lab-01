@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 import { GetByCoursesAndStudentIdParam } from 'src/interfaces/courseid-studentid';
+import { CreateEnrollment } from 'src/interfaces/create-enrollment';
 
 @Injectable()
 export class EnrollmentsService {
@@ -23,6 +24,17 @@ export class EnrollmentsService {
     }
 
     return student;
+  }
+
+  async createEnrollment({ courseId, studentId }: CreateEnrollment) {
+    const enrollment = await this.prisma.enrollment.create({
+      data: {
+        courseId,
+        studentId,
+      },
+    });
+
+    return enrollment;
   }
 
   listAllEnrollments() {
