@@ -15,6 +15,20 @@ export class CoursesService {
     });
   }
 
+  async getCourseBySlug(slug: string) {
+    const course = await this.prisma.course.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (!course) {
+      throw new HttpException('Course not found!', HttpStatus.NOT_FOUND);
+    }
+
+    return course;
+  }
+
   async findCourseById(id: string) {
     const course = await this.prisma.course.findUnique({
       where: { id },
@@ -27,8 +41,10 @@ export class CoursesService {
     return course;
   }
 
-  async createCourse({ title }: CreateCourse) {
-    const slug = slugify(title, { lower: true });
+  async createCourse({
+    title,
+    slug = slugify(title, { lower: true }),
+  }: CreateCourse) {
     const productWithSameSlug = await this.prisma.course.findUnique({
       where: { slug },
     });
