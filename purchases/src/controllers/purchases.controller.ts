@@ -4,8 +4,8 @@ import { AuthUserDTO } from 'src/interfaces/dto/auth-user-dto';
 import { CustomersService } from 'src/services/customers.service';
 import { ProductsService } from 'src/services/products.service';
 import { PurchasesService } from 'src/services/purchases.service';
-import { AuthorizationGuard } from '../authorization.guard';
-import { CurrentUser } from '../current-user';
+import { AuthorizationGuard } from '@/http/auth/authorization.guard';
+import { CurrentUser } from '@/http/auth/current-user';
 
 @Controller('api/v1')
 export class PurchasesController {
@@ -33,7 +33,7 @@ export class PurchasesController {
     @Param('productId') productId,
     @CurrentUser() user: AuthUserDTO,
   ) {
-    let customer = await this.customersService.getCustomerByAuthUserId(
+    let customer: any = await this.customersService.getCustomerByAuthUserId(
       user.sub,
     );
 
@@ -43,7 +43,7 @@ export class PurchasesController {
       });
     }
 
-    return this.purchasesService.createPurchase({
+    return await this.purchasesService.createPurchase({
       productId,
       customerId: customer.id,
     });

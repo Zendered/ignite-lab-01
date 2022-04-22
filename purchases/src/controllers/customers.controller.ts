@@ -1,10 +1,10 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { AuthUserDTO } from '../../../interfaces/dto/auth-user-dto';
-import { CustomersService } from '../../../services/customers.service';
-import { AuthorizationGuard } from '../authorization.guard';
-import { CurrentUser } from '../current-user';
-import { PurchasesService } from '../../../services/purchases.service';
-import { Customer } from '../../../entities/customer.entity';
+import { AuthUserDTO } from '@/interfaces/dto/auth-user-dto';
+import { CustomersService } from '@/services/customers.service';
+import { AuthorizationGuard } from '@/http/auth/authorization.guard';
+import { CurrentUser } from '@/http/auth/current-user';
+import { PurchasesService } from '@/services/purchases.service';
+import { Customer } from '@/entities/customer.entity';
 
 @Controller('api/v1')
 export class CustomersController {
