@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
+import { CreateStudentParams } from 'src/interfaces/create-student';
 
 @Injectable()
 export class StudentsService {
@@ -10,6 +11,12 @@ export class StudentsService {
       orderBy: {
         createdAt: 'desc',
       },
+    });
+  }
+
+  async createStudent({ authUserId }: CreateStudentParams) {
+    return await this.prisma.student.create({
+      data: { authUserId },
     });
   }
 
