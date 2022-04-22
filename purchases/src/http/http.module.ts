@@ -7,9 +7,10 @@ import { PurchasesService } from 'src/services/purchases.service';
 import { CustomersController } from '@/controllers/customers.controller';
 import { ProductsController } from '@/controllers/products.controller';
 import { PurchasesController } from '@/controllers/purchases.controller';
+import { MessagingModule } from '@/messaging/messaging.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DatabaseModule],
+  imports: [ConfigModule.forRoot(), DatabaseModule, MessagingModule],
   controllers: [CustomersController, ProductsController, PurchasesController],
   providers: [ProductsService, PurchasesService, CustomersService],
 })
