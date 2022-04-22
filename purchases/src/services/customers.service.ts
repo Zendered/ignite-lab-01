@@ -9,13 +9,16 @@ interface CreateCustomerParams {
 export class CustomersService {
   constructor(private prisma: PrismaService) {}
 
-  getCustomerByAuthUserId(authUserId: string) {
-    const customer = this.prisma.customer.findUnique({
+  async getCustomerByAuthUserId(authUserId: string) {
+    const customer = await this.prisma.customer.findUnique({
       where: { authUserId },
     });
+
     if (!customer) {
       throw new HttpException('Customer not found!', HttpStatus.BAD_REQUEST);
     }
+
+    return customer;
   }
 
   async createCustomer({ authUserId }: CreateCustomerParams) {
