@@ -1,4 +1,4 @@
-export interface AuthUserDTO {
+export class AuthUserDTO {
   iss: string;
   sub: string;
   aud: string;
