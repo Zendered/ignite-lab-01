@@ -30,4 +30,4 @@
 
 
 ## Projeto de estudo 
->Projeto feio atraves da plataforma da [rocketseat](https://www.rocketseat.com.br/)
+>Projeto criado pela [rocketseat](https://www.rocketseat.com.br/)
